@@ -13,12 +13,25 @@ def cmd():
         # Command was successful, capture the output
         output = result.stdout
         print("Command Output:")
-        print(output)
+        #print(output)
+        check(output)
+
     else:
         # Command failed, capture the error message
         error_message = result.stderr
         print("Command Error:")
         print(error_message)
 
+
+
+
+def check(out):
+    
+    suspected = "pico"
+
+    if suspected in out:
+        print("found !!!!")
+    else:
+        print("not found !!!")
 
 cmd()
