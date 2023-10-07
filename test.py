@@ -1,4 +1,4 @@
-import usb
+from pyusb import usb
 
 busses = usb.busses()
 for bus in busses:
