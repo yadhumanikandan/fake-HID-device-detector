@@ -1,8 +1,8 @@
-from pyusb import usb
+import usb.core
 
-busses = usb.busses()
+busses = usb.core.busses()
 for bus in busses:
-    devices = bus.devices
+    devices = bus.core.devices
     for dev in devices:
         #if "respberry" in dev.filename.lower():
         print(f"Device: {dev.filename}")
