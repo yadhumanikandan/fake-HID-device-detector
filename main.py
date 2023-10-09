@@ -31,15 +31,14 @@ def check(out):
     suspected = "Pico"
 
     if suspected in out:
-        write()
+        write(out)
 
 
-def write():
+def write(log):
     file_path = "log.txt"
 
     with open(file_path, "a") as file:
-        if output != '':
-            file.write("\n\n" + output)
+        file.write("\n\n" + log)
 
 while True:
     search_usb()
