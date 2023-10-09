@@ -32,8 +32,6 @@ def check(out):
 
     if suspected in out:
         write()
-    else:
-        print("not found !!!")
 
 
 def write():
