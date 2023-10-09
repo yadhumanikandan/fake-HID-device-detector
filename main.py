@@ -1,7 +1,8 @@
 import subprocess
 
+output = ""
 
-def cmd():
+def search_usb():
     # Your terminal command as a string
     command = "dmesg | grep -i hid"
 
@@ -27,11 +28,19 @@ def cmd():
 
 def check(out):
     
-    suspected = "pico"
+    suspected = "Pico"
 
     if suspected in out:
-        print("found !!!!")
+        write()
     else:
         print("not found !!!")
 
-cmd()
+
+def write():
+    file_path = "log.txt"
+
+    with open(file_path, "a") as file:
+        file.write("\n\n" + output)
+
+while True:
+    search_usb()
