@@ -13,14 +13,14 @@ def search_usb():
     if result.returncode == 0:
         # Command was successful, capture the output
         output = result.stdout
-        print("Command Output:")
+        #print("Command Output:")
         #print(output)
         check(output)
 
     else:
         # Command failed, capture the error message
         error_message = result.stderr
-        print("Command Error:")
+        #print("Command Error:")
         print(error_message)
 
 
@@ -38,7 +38,8 @@ def write():
     file_path = "log.txt"
 
     with open(file_path, "a") as file:
-        file.write("\n\n" + output)
+        if output != '':
+            file.write("\n\n" + output)
 
 while True:
     search_usb()
