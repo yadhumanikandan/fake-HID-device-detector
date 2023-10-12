@@ -39,16 +39,27 @@ def process(out):                       ## process the command output and timest
 
     log_data = []
 
+    existing_data = []
+
     with open('log.json', 'r') as json_file:
-        data = json.load(json_file)
+        log = json.load(json_file)
 
     # Check if the file has data
-    if data:
-        print("The JSON file has data.")
+    if log:
+        for entry in log:
+            event = entry.get("event")
+            if event is not None:
+                existing_data.append(event)                     # read all existing log to program
+        
+        difference = list(set(output_lines) - set(existing_data))       #find its difference
+
+        existing_data.append(difference)
+
+        with open('log.json', 'w') as json_file:
+            json.dump(existing_data, json_file, indent=4)
+
     else:
         for line in output_lines:
-            # timestamp = re.search(timestamp_pattern, line).group(1)
-            # log_message = line.split('] ')[-1]  # Extract the log message
             log_data.append({"event": line})
 
         with open('log.json', 'w') as json_file:
