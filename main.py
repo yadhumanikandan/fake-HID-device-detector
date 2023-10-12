@@ -42,3 +42,6 @@ def process(out):
 
 # while True:
 #     search_usb()
+
+
+search_usb()
