@@ -1,4 +1,5 @@
 import subprocess
+import re
 
 output = ""
 
@@ -27,11 +28,17 @@ def search_usb():
 
 
 def process(out):
-    print(out)
+    # print(out)
     output_lines =out.strip().split('\n')
     
     for lines in output_lines:
         print(lines + "\n\n")
+
+    timestamp_pattern = r'\[(\s*\d+\.\d+)\]'
+
+    timestamps = [re.search(timestamp_pattern, line).group(1) for line in output_lines]
+
+    print(timestamps)
 
 
 
