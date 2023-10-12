@@ -46,12 +46,11 @@ def process(out):                       ## process the command output and timest
     if data:
         print("The JSON file has data.")
     else:
-        print("The JSON file is empty.")
+        for line in output_lines:
+            # timestamp = re.search(timestamp_pattern, line).group(1)
+            # log_message = line.split('] ')[-1]  # Extract the log message
+            log_data.append({"event": line})
 
-    # for line in output_lines:
-    # timestamp = re.search(timestamp_pattern, line).group(1)
-    # log_message = line.split('] ')[-1]  # Extract the log message
-        # log_data.append({"timestamp": timestamp, "message": log_message})
 
 
     # with open('log.json', 'w') as json_file:
