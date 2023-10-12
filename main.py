@@ -1,5 +1,6 @@
 import subprocess
 import re
+import json
 
 output = ""
 
@@ -25,20 +26,44 @@ def search_usb():
         print(error_message)
 
 
+# def checkExist():                       ## check if the log timestamp already exists
 
 
-def process(out):
+
+
+def process(out):                       ## process the command output and timestamp
     # print(out)
+    # timestamp_pattern = r'\[(\s*\d+\.\d+)\]'
+
     output_lines =out.strip().split('\n')
+
+    log_data = []
+
+    with open('log.json', 'r') as json_file:
+        data = json.load(json_file)
+
+    # Check if the file has data
+    if data:
+        print("The JSON file has data.")
+    else:
+        print("The JSON file is empty.")
+
+    # for line in output_lines:
+    # timestamp = re.search(timestamp_pattern, line).group(1)
+    # log_message = line.split('] ')[-1]  # Extract the log message
+        # log_data.append({"timestamp": timestamp, "message": log_message})
+
+
+    # with open('log.json', 'w') as json_file:
+    #     json.dump(log_data, json_file, indent=4)
+
+    # timestamps = [re.search(timestamp_pattern, line).group(1) for line in output_lines]
     
-    for lines in output_lines:
-        print(lines + "\n\n")
+    # for lines in output_lines:
+        # print(lines + "\n\n")
+        
 
-    timestamp_pattern = r'\[(\s*\d+\.\d+)\]'
-
-    timestamps = [re.search(timestamp_pattern, line).group(1) for line in output_lines]
-
-    print(timestamps)
+    # print(timestamps)
 
 
 
