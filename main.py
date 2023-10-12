@@ -4,7 +4,7 @@ output = ""
 
 def search_usb():
     # Your terminal command as a string
-    command = "dmesg | grep -i hid"
+    command = "dmesg | grep -i hid-generic"
 
     # Run the command and capture the result
     result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
@@ -15,7 +15,7 @@ def search_usb():
         output = result.stdout
         #print("Command Output:")
         #print(output)
-        check(output)
+        process(output)
 
     else:
         # Command failed, capture the error message
@@ -26,19 +26,19 @@ def search_usb():
 
 
 
-def check(out):
+def process(out):
+    output_lines = output.strip().split('\n')
     
-    suspected = "Pico"
-
-    if suspected in out:
-        write(out)
+    for lines in output_lines:
+        print(lines + "\n\n")
 
 
-def write(log):
-    file_path = "log.txt"
 
-    with open(file_path, "a") as file:
-        file.write("\n\n" + log)
+# def write(log):
+#     file_path = "log.txt"
 
-while True:
-    search_usb()
+#     with open(file_path, "a") as file:
+#         file.write("\n\n" + log)
+
+# while True:
+#     search_usb()
