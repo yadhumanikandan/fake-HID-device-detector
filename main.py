@@ -53,10 +53,17 @@ def process(out):                       ## process the command output and timest
         
         difference = list(set(output_lines) - set(existing_data))       #find its difference
 
-        existing_data.append(difference)
+        log_data = []
+
+        for line in existing_data:
+            log_data.append({"event": line})
+        
+        for line in difference:
+            log_data.append({"event": line})
+        # existing_data.append(difference)
 
         with open('log.json', 'w') as json_file:
-            json.dump(existing_data, json_file, indent=4)
+            json.dump(log_data, json_file, indent=4)
 
     else:
         for line in output_lines:
