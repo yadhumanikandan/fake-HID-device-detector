@@ -27,7 +27,8 @@ def search_usb():
 
 
 def process(out):
-    output_lines = output.strip().split('\n')
+    print(out)
+    output_lines =out.strip().split('\n')
     
     for lines in output_lines:
         print(lines + "\n\n")
