@@ -1,3 +1,5 @@
+# fake HID device detector
+
 import subprocess
 import re
 import json
