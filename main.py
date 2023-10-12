@@ -51,6 +51,9 @@ def process(out):                       ## process the command output and timest
             # log_message = line.split('] ')[-1]  # Extract the log message
             log_data.append({"event": line})
 
+        with open('log.json', 'w') as json_file:
+            json.dump(log_data, json_file, indent=4)
+
 
 
     # with open('log.json', 'w') as json_file:
