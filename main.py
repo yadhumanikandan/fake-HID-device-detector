@@ -13,15 +13,23 @@ def search_usb():
 
     if result.returncode == 0:
         output = result.stdout
-        process(output, current_time)
+        save(output, current_time)
 
     else:
         error_message = result.stderr
         print(error_message)
 
 
+def checkEvent(event):
+    suspected = ["Raspberry Pi"]
 
-def process(output, time):                       ## process the command output
+    if suspected in event:
+        return True
+    else:
+        return False
+
+
+def save(output, time):
 
     output_lines =output.strip().split('\n')
 
@@ -33,31 +41,13 @@ def process(output, time):                       ## process the command output
         log = json.load(json_file)
 
     # Check if the file has data
-    if log:
-        # for entry in log:
-        #     event = entry.get("event")
-        #     if event is not None:
-        #         existing_data.append(event)                     # read all existing log to program
-        
+    if log:        
         existing_events = [d["event"] for d in log]
 
         difference = [event for event in output_lines if event not in existing_events]
 
-        # difference = list(set(output_lines) - set(existing_events))       #find its difference
-
-        # log_data = []
-
-        # for line in existing_events:
-        #     log_data.append({"event": line})
-        
-        # for line in difference:
-        #     log_data.append({"event": line})
-
-        # current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
-        # Append events to list_of_dicts with the current time
         for event in difference:
-            new_dict = {"event": event, "time": time}
+            new_dict = {"event": event, "time": time, "suspected": checkEvent()}
             log.append(new_dict)
 
 
@@ -65,8 +55,8 @@ def process(output, time):                       ## process the command output
             json.dump(log, json_file, indent=4)
 
     else:
-        for line in output_lines:
-            log_data.append({"event": line, "time": time})
+        for event in output_lines:
+            log_data.append({"event": event, "time": time, "suspected": checkEvent()})
 
         with open('log.json', 'w') as json_file:
             json.dump(log_data, json_file, indent=4)
