@@ -1,3 +1,4 @@
+import subprocess
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk
@@ -7,8 +8,8 @@ class MyWindow(Gtk.Window):
         Gtk.Window.__init__(self, title="Window with Close Button")
         self.connect("destroy", Gtk.main_quit)
 
-        self.button = Gtk.Button(label="Close")
-        self.button.connect("clicked", self.on_close_button_clicked)
+        self.button = Gtk.Button(label="Show Log")
+        self.button.connect("clicked", self.button_clicked)
 
         self.label = Gtk.Label()
         self.label.set_markup('<span foreground="red" font_desc="14">This is a message in red.</span>')
@@ -28,8 +29,9 @@ class MyWindow(Gtk.Window):
 
         self.add(align)
 
-    def on_close_button_clicked(self, widget):
-        Gtk.main_quit()
+    def button_clicked(self, widget):
+        command = "python3 /home/manik/project/cp/test.py"
+        subprocess.run(command, shell=True)
 
 win = MyWindow()
 win.show_all()
