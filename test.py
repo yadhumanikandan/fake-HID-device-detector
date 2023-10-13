@@ -14,6 +14,9 @@ class MyWindow(Gtk.Window):
         self.label.set_markup('<span foreground="red">This is a message in red.</span>')
         self.label.set_justify(Gtk.Justification.CENTER)
 
+        # Set the height request for the label
+        self.label.set_size_request(-1, 100)  # Adjust the height here (100 in this example)
+
         # Create a vertical box and add the label and button
         box = Gtk.VBox()
         box.add(self.label)
