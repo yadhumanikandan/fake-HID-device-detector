@@ -22,11 +22,16 @@ def search_usb():
 
 def checkEvent(event):
     suspected = ["Raspberry Pi"]
+    check = 0
 
-    if suspected in event:
-        return True
-    else:
+    for s in suspected:
+        if s in event:
+            check = 1
+    
+    if check == 0:
         return False
+    else:
+        return True
 
 
 def save(output, time):
