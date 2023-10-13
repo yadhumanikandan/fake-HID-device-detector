@@ -6,6 +6,7 @@ class MyWindow(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title="Window with Close Button")
         self.connect("destroy", Gtk.main_quit)
+        self.set_default_size(300, 200)  # Set the window size
 
         self.button = Gtk.Button(label="Close")
         self.button.connect("clicked", self.on_close_button_clicked)
@@ -13,20 +14,19 @@ class MyWindow(Gtk.Window):
         self.label = Gtk.Label()
         self.label.set_markup('<span foreground="red">This is a message in red.</span>')
         self.label.set_justify(Gtk.Justification.CENTER)
-
-        # Set the height request for the label
         self.label.set_size_request(-1, 100)  # Adjust the height here (100 in this example)
 
-        # Create a vertical box and add the label and button
         box = Gtk.VBox()
         box.add(self.label)
         box.add(self.button)
 
-        # Create an Alignment container to center the box
         align = Gtk.Alignment(xalign=0.5, yalign=0.5, xscale=1.0, yscale=1.0)
         align.add(box)
 
         self.add(align)
+
+        # Center the window on the screen
+        self.set_position(Gtk.WindowPosition.CENTER)
 
     def on_close_button_clicked(self, widget):
         Gtk.main_quit()
