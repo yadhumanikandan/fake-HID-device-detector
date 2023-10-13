@@ -6,6 +6,7 @@ class MyWindow(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title="Window with Close Button")
         self.connect("destroy", Gtk.main_quit)
+        
         self.set_default_size(300, 200)  # Set the window size
 
         self.button = Gtk.Button(label="Close")
@@ -25,8 +26,14 @@ class MyWindow(Gtk.Window):
 
         self.add(align)
 
-        # Center the window on the screen
-        self.set_position(Gtk.WindowPosition.CENTER)
+        # Get the screen and center the window
+        screen = Gdk.Screen.get_default()
+        screen_width = screen.get_width()
+        screen_height = screen.get_height()
+        window_width = self.get_size()[0]
+        window_height = self.get_size()[1]
+        self.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+        self.move((screen_width - window_width) / 2, (screen_height - window_height) / 2)
 
     def on_close_button_clicked(self, widget):
         Gtk.main_quit()
