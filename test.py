@@ -12,7 +12,7 @@ class MyWindow(Gtk.Window):
         self.button.connect("clicked", self.button_clicked)
 
         self.label = Gtk.Label()
-        self.label.set_markup('<span foreground="red" font_desc="14">A suspected device has been connected to the system.</span>')
+        self.label.set_markup('<span foreground="red" font_desc="14">A suspected device has been connected \n to the system.</span>')
         self.label.set_justify(Gtk.Justification.CENTER)
 
         # Set the height request for the label
