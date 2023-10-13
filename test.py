@@ -1,6 +1,6 @@
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
+from gi.repository import Gtk, Pango
 
 class MyWindow(Gtk.Window):
     def __init__(self):
@@ -11,7 +11,8 @@ class MyWindow(Gtk.Window):
         self.button.connect("clicked", self.on_close_button_clicked)
 
         self.label = Gtk.Label()
-        self.label.set_text("This is a message in the window.")
+        self.label.set_markup('<span foreground="red">This is a message in red.</span>')
+        self.label.set_justify(Gtk.Justification.CENTER)
 
         # Create a vertical box and add the label and button
         box = Gtk.VBox()
