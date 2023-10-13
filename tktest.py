@@ -1,17 +1,20 @@
 import tkinter as tk
-from tkinter import messagebox
 
-# Function to show the popup message
-def show_popup_message():
-    messagebox.showinfo("Popup Message", "This is a message.")
-    
+# Function to close the message window
+def close_message_window():
+    message_window.destroy()
+
 # Create the main window
 root = tk.Tk()
-root.title("Popup Message Example")
+root.title("Message Window Example")
 
-# Create a button to trigger the popup message
-button = tk.Button(root, text="Show Popup Message", command=show_popup_message)
-button.pack(pady=20)
+# Create a label with the message
+message_label = tk.Label(root, text="This is a message.")
+message_label.pack(pady=20)
+
+# Create a button at the bottom to close the window
+close_button = tk.Button(root, text="OK", command=close_message_window)
+close_button.pack(pady=10)
 
 # Run the tkinter main loop
 root.mainloop()
