@@ -47,7 +47,7 @@ def save(output, time):
         difference = [event for event in output_lines if event not in existing_events]
 
         for event in difference:
-            new_dict = {"event": event, "time": time, "suspected": checkEvent()}
+            new_dict = {"event": event, "time": time, "suspected": checkEvent(event)}
             log.append(new_dict)
 
 
@@ -56,7 +56,7 @@ def save(output, time):
 
     else:
         for event in output_lines:
-            log_data.append({"event": event, "time": time, "suspected": checkEvent()})
+            log_data.append({"event": event, "time": time, "suspected": checkEvent(event)})
 
         with open('log.json', 'w') as json_file:
             json.dump(log_data, json_file, indent=4)
