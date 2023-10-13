@@ -5,14 +5,14 @@ from gi.repository import Gtk, Gdk
 
 class MyWindow(Gtk.Window):
     def __init__(self):
-        Gtk.Window.__init__(self, title="Window with Close Button")
+        Gtk.Window.__init__(self, title="A Device has been detected")
         self.connect("destroy", Gtk.main_quit)
 
         self.button = Gtk.Button(label="Show Log")
         self.button.connect("clicked", self.button_clicked)
 
         self.label = Gtk.Label()
-        self.label.set_markup('<span foreground="red" font_desc="14">This is a message in red.</span>')
+        self.label.set_markup('<span foreground="red" font_desc="14">A suspected device has been connected to the system.</span>')
         self.label.set_justify(Gtk.Justification.CENTER)
 
         # Set the height request for the label
