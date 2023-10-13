@@ -10,7 +10,15 @@ class MyWindow(Gtk.Window):
         self.button = Gtk.Button(label="Close")
         self.button.connect("clicked", self.on_close_button_clicked)
 
-        self.add(self.button)
+        self.label = Gtk.Label()
+        self.label.set_text("This is a message in the window.")
+
+        # Create a vertical box and add the label and button
+        box = Gtk.VBox()
+        box.add(self.label)
+        box.add(self.button)
+
+        self.add(box)
 
     def on_close_button_clicked(self, widget):
         Gtk.main_quit()
