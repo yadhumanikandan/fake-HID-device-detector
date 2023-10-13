@@ -1,6 +1,6 @@
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Pango
+from gi.repository import Gtk, Gdk
 
 class MyWindow(Gtk.Window):
     def __init__(self):
@@ -22,7 +22,11 @@ class MyWindow(Gtk.Window):
         box.add(self.label)
         box.add(self.button)
 
-        self.add(box)
+        # Create an Alignment container to center the box
+        align = Gtk.Alignment(xalign=0.5, yalign=0.5, xscale=1.0, yscale=1.0)
+        align.add(box)
+
+        self.add(align)
 
     def on_close_button_clicked(self, widget):
         Gtk.main_quit()
