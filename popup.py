@@ -3,7 +3,7 @@ import subprocess
 
 # Function to close the message window
 def close_message_window():
-    command = "python3 /home/manik/project/cp/tktest.py"
+    command = "python3 /home/manik/project/cp/tktest.py"            ### command to change
     root.destroy()
     subprocess.run(command, shell=True)
 
