@@ -1,6 +1,6 @@
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gdk
+from gi.repository import Gtk, Gdk, Pango
 
 class MyWindow(Gtk.Window):
     def __init__(self):
@@ -11,11 +11,8 @@ class MyWindow(Gtk.Window):
         self.button.connect("clicked", self.on_close_button_clicked)
 
         self.label = Gtk.Label()
-        self.label.set_markup('<span foreground="red">This is a message in red.</span>')
+        self.label.set_markup('<span foreground="red" font_desc="24">This is a message in red with a larger font.</span>')
         self.label.set_justify(Gtk.Justification.CENTER)
-
-        # Set the height request for the label
-        self.label.set_size_request(-1, 100)  # Adjust the height here (100 in this example)
 
         # Create a vertical box and add the label and button
         box = Gtk.VBox()
@@ -34,3 +31,4 @@ class MyWindow(Gtk.Window):
 win = MyWindow()
 win.show_all()
 Gtk.main()
+
