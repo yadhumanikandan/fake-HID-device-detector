@@ -32,7 +32,6 @@ class MyWindow(Gtk.Window):
     def button_clicked(self, widget):
         command = "python3 /home/manik/project/cp/test.py"
         subprocess.run(command, shell=True)
-        Gtk.main_quit()
 
 
 win = MyWindow()
