@@ -13,7 +13,7 @@ root.title("Device detected")
 root.geometry("400x150")  # Adjust the window size here (width x height)
 
 # Create a label with the message
-message_label = tk.Label(root, text="A suspected device has been connected", fg="red", font=("Helvetica", 18))
+message_label = tk.Label(root, text="A suspected device has\n been connected", fg="red", font=("Helvetica", 18))
 message_label.pack(pady=25)  # Increase pady for more space
 
 # Create a button at the bottom to close the window
