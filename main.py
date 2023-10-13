@@ -73,5 +73,5 @@ def process(output, time):                       ## process the command output
 
 
 
-
-search_usb()
+while True:
+    search_usb()
