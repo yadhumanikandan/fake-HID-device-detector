@@ -1,12 +1,12 @@
 import tkinter as tk
 import subprocess
 
-def popup():
+def popup(device_name):
     root = tk.Tk()
     root.title("Device detected")
     root.geometry("400x150")
 
-    message_label = tk.Label(root, text="A suspected device has\n been connected", fg="red", font=("Helvetica", 18))
+    message_label = tk.Label(root, text="A suspected device has\n been connected\nname: "+device_name, fg="red", font=("Helvetica", 18))
     message_label.pack(pady=25)
 
     def close_message_window():
