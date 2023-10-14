@@ -8,7 +8,7 @@ import threading
 from popup import popup
 
 
-# thread = threading.Thread(target=popup())
+thread = threading.Thread(target=popup())
 
 def search_usb():
     command = "dmesg | grep -i hid-generic"
@@ -70,7 +70,7 @@ def save(output, time):
             data = extract(event)
             log.append({"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"]})
             if data["suspected"] == True:
-                popup()
+                thread.start()
 
         with open('log.json', 'w') as json_file:
             json.dump(log, json_file, indent=4)
