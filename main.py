@@ -71,6 +71,7 @@ def save(output, time):
             log.append({"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"]})
             if data["suspected"] == True:
                 thread = threading.Thread(target=popup())
+                thread.daemon = True
                 thread.start()
 
         with open('log.json', 'w') as json_file:
