@@ -36,8 +36,8 @@ def extract(event):
         device_id = match.group(1)
         print(device_id)
         device_name = match.group(2)
-        p, vendor_id, product_id = device_id.split(':')
-        product_id, p = product_id.split('.')
+        _, vendor_id, product_id = device_id.split(':')
+        product_id, _ = product_id.split('.')
 
     for s in suspected:
         if s in event:
