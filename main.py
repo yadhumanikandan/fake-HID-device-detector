@@ -63,7 +63,7 @@ def save(output, time):
 
         difference = [event for event in output_lines if event not in existing_events]
 
-        thread = threading.Thread(target=popup)
+        thread = threading.Thread(target=popup())
 
         for event in difference:
             data = extract(event)
