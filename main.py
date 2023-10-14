@@ -8,7 +8,7 @@ import threading
 from popup import popup
 
 
-thread = threading.Thread(target=popup())
+# thread = threading.Thread(target=popup())
 
 def search_usb():
     command = "dmesg | grep -i hid-generic"
@@ -71,6 +71,7 @@ def save(output, time):
             log.append({"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"]})
             if data["suspected"] == True:
                 try:
+                    thread = threading.Thread(target=popup())
                     thread.start()
                 except Exception as e:
                     print(e)
