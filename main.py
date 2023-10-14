@@ -5,6 +5,7 @@ import json
 import datetime
 import re
 import threading
+import os
 from popup import popup
 
 
@@ -29,12 +30,10 @@ def extract(event):
     check = 0
 
     pattern = r"\[.*\] hid-generic (\w+:\w+:\w+\.\w+):.*\[(.*?)\] on .*"
-
     match = re.search(pattern, event)
 
     if match:
         device_id = match.group(1)
-        print(device_id)
         device_name = match.group(2)
         _, vendor_id, product_id = device_id.split(':')
         product_id, _ = product_id.split('.')
@@ -56,6 +55,12 @@ def save(output, time):
     log_data = []
 
     existing_events = []
+
+    file_path = 'log.json'
+
+    if not os.path.exists(file_path):
+        with open(file_path, 'w') as file:
+            file.write('{}')
 
     with open('log.json', 'r') as json_file:
         log = json.load(json_file)
