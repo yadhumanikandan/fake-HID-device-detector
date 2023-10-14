@@ -72,6 +72,7 @@ def save(output, time):
             if data["suspected"] == "true":
                 thread.start()
             log.append({"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"]})
+            data = []
 
         with open('log.json', 'w') as json_file:
             json.dump(log, json_file, indent=4)
