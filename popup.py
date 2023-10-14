@@ -21,10 +21,8 @@ def popup():
     close_button = tk.Button(root, text="Show Log", command=close_message_window, width=10, height=3)
     close_button.pack(pady=10)  # Increase pady for more space
 
-    # After setting up the window, you don't need to run the tkinter main loop here.
-    # The main loop should be run in your main program.
-
-    # root.mainloop()
+    # Run the tkinter main loop to display the window
+    root.mainloop()
 
 if __name__ == "__main__":
     popup()
