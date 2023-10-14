@@ -4,7 +4,7 @@ import subprocess
 def popup(device_name):
     root = tk.Tk()
     root.title("Device detected")
-    root.geometry("400x150")
+    root.geometry("400x200")
 
     message_label = tk.Label(root, text="A suspected device has\n been connected\nname: "+device_name, fg="red", font=("Helvetica", 18))
     message_label.pack(pady=25)
