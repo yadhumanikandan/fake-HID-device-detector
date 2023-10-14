@@ -34,6 +34,7 @@ def extract(event):
 
     if match:
         device_id = match.group(1)
+        print(device_id)
         device_name = match.group(2)
         vendor_id, product_id, _ = device_id.split(':')
 
