@@ -4,6 +4,8 @@ import subprocess
 import json
 import datetime
 import re
+import threading
+from popup import popup
 
 
 def search_usb():
@@ -61,8 +63,12 @@ def save(output, time):
 
         difference = [event for event in output_lines if event not in existing_events]
 
+        thread = threading.Thread(target=popup)
+
         for event in difference:
             data = extract(event)
+            if data["suspected"] == "true":
+                thread.start()
             log.append({"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"]})
 
 
