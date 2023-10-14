@@ -8,6 +8,8 @@ import threading
 from popup import popup
 
 
+thread = threading.Thread(target=popup())
+
 def search_usb():
     command = "dmesg | grep -i hid-generic"
 
@@ -62,8 +64,6 @@ def save(output, time):
         existing_events = [d["event"] for d in log]
 
         difference = [event for event in output_lines if event not in existing_events]
-
-        thread = threading.Thread(target=popup())
 
         event = ""
 
