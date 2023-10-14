@@ -56,16 +56,17 @@ def save(output, time):
 
     existing_events = []
 
-    file_path = 'log.json'
+    LOG_FILE = 'log.json'
 
-    if not os.path.exists(file_path):
-        with open(file_path, 'w') as file:
-            json.dump({}, file, indent=4)
+    if not os.path.exists(LOG_FILE):
+        with open(LOG_FILE, 'w') as json_file:
+            json.dump([], json_file)
+
+        os.chmod(LOG_FILE, 0o644)
 
     with open('log.json', 'r') as json_file:
         log = json.load(json_file)
 
-    # Check if the file has data
     if log:        
         existing_events = [d["event"] for d in log]
 
