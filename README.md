@@ -1,2 +1,1 @@
-#cp
-test
+# fake HID device detector
