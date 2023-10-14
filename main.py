@@ -64,12 +64,13 @@ def save(output, time):
         existing_events = [d["event"] for d in log]
 
         difference = [event for event in output_lines if event not in existing_events]
+        print(difference)
 
         for event in difference:
             data = extract(event)
             log.append({"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"]})
-            if data["suspected"] == "true":
-                popup()
+            # if data["suspected"] == "true":
+            #     popup()
 
         with open('log.json', 'w') as json_file:
             json.dump(log, json_file, indent=4)
