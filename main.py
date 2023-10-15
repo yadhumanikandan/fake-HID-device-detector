@@ -75,12 +75,11 @@ def save(output, time):
         for event in difference:
             data = extract(event)
             log.append({"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"]})
+            with open('log.json', 'w') as json_file:
+                json.dump(log, json_file, indent=4)
             if data["suspected"] == True:
                 thread = threading.Thread(target=popup(data["name"]))
                 thread.start()
-
-        with open('log.json', 'w') as json_file:
-            json.dump(log, json_file, indent=4)
 
     else:
         for event in output_lines:
