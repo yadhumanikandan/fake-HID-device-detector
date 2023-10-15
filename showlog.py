@@ -10,9 +10,8 @@ with open("log.json", "r") as json_file:
 root = tk.Tk()
 root.title("List Viewer")
 root.geometry("1000x600")
-root.configure(bg='black')
 
-canvas = tk.Canvas(root)
+canvas = tk.Canvas(root, bg='black')
 canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
 scrollbar = ttk.Scrollbar(root, orient="vertical", command=canvas.yview)
