@@ -16,7 +16,7 @@ canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
 scrollbar = ttk.Scrollbar(root, orient="vertical", command=canvas.yview)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-canvas.configure(yscrollcommand=scrollbar.set, bg='black')
+canvas.configure(yscrollcommand=scrollbar.set)
 
 frame = tk.Frame(canvas)
 canvas.create_window((0, 0), window=frame, anchor="nw")
@@ -34,7 +34,7 @@ for element in reversed(elements):
 
     empty_label = tk.Label(frame, text="", anchor='w', justify='left', padx=10, pady=5)
     empty_label.pack(side=tk.TOP, fill=tk.BOTH)
-    label = tk.Label(frame, text="Event: "+element["event"], anchor='w', justify='left',fg=colour, padx=10, pady=5)
+    label = tk.Label(frame, text="Event: "+element["event"], anchor='w', justify='left',fg=colour,bg='black' padx=10, pady=5)
     label.pack(side=tk.TOP, fill=tk.BOTH)
     label = tk.Label(frame, text="Name: "+element["name"], anchor='w', justify='left',fg=colour, padx=10, pady=5)
     label.pack(side=tk.TOP, fill=tk.BOTH)
