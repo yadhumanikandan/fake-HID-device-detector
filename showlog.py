@@ -26,6 +26,9 @@ def on_frame_configure(event):
 
 frame.bind("<Configure>", on_frame_configure)
 
+style = ttk.Style()
+style.configure("Custom.TSeparator", background="black", troughcolor="white")
+
 for element in reversed(elements):
     colour = "white"
 
@@ -46,7 +49,7 @@ for element in reversed(elements):
     label.pack(side=tk.TOP, fill=tk.BOTH)
     empty_label = tk.Label(frame, text="", anchor='w', justify='left',bg='black', padx=10, pady=5)
     empty_label.pack(side=tk.TOP, fill=tk.BOTH)
-    separator = ttk.Separator(frame, orient="horizontal", bg='black')
+    separator = ttk.Separator(frame, orient="horizontal", style="Custom.TSeparator")
     separator.pack(side=tk.TOP, fill=tk.BOTH)
 
 root.mainloop()
