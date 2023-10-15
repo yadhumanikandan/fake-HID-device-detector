@@ -26,30 +26,27 @@ def on_frame_configure(event):
 
 frame.bind("<Configure>", on_frame_configure)
 
-style = ttk.Style()
-style.configure("Custom.TSeparator", background="black", troughcolor="white")
-
 for element in reversed(elements):
-    colour = "white"
+    colour = "black"
 
     if element["suspected"] == True:
         colour = "red"
 
-    empty_label = tk.Label(frame, text="", anchor='w', justify='left',bg='black', padx=10, pady=5)
+    empty_label = tk.Label(frame, text="", anchor='w', justify='left', padx=10, pady=5)
     empty_label.pack(side=tk.TOP, fill=tk.BOTH)
-    label = tk.Label(frame, text="Event: "+element["event"], anchor='w', justify='left',fg=colour,bg='black', padx=10, pady=5)
+    label = tk.Label(frame, text="Event: "+element["event"], anchor='w', justify='left',fg=colour, padx=10, pady=5)
     label.pack(side=tk.TOP, fill=tk.BOTH)
-    label = tk.Label(frame, text="Name: "+element["name"], anchor='w', justify='left',fg=colour,bg='black', padx=10, pady=5)
+    label = tk.Label(frame, text="Name: "+element["name"], anchor='w', justify='left',fg=colour, padx=10, pady=5)
     label.pack(side=tk.TOP, fill=tk.BOTH)
-    label = tk.Label(frame, text="Time: "+element["time"], anchor='w', justify='left',fg=colour,bg='black', padx=10, pady=5)
+    label = tk.Label(frame, text="Time: "+element["time"], anchor='w', justify='left',fg=colour, padx=10, pady=5)
     label.pack(side=tk.TOP, fill=tk.BOTH)
-    label = tk.Label(frame, text="PID: "+element["pid"], anchor='w', justify='left',fg=colour,bg='black', padx=10, pady=5)
+    label = tk.Label(frame, text="PID: "+element["pid"], anchor='w', justify='left',fg=colour, padx=10, pady=5)
     label.pack(side=tk.TOP, fill=tk.BOTH)
-    label = tk.Label(frame, text="VID: "+element["vid"], anchor='w', justify='left',fg=colour,bg='black', padx=10, pady=5)
+    label = tk.Label(frame, text="VID: "+element["vid"], anchor='w', justify='left',fg=colour, padx=10, pady=5)
     label.pack(side=tk.TOP, fill=tk.BOTH)
-    empty_label = tk.Label(frame, text="", anchor='w', justify='left',bg='black', padx=10, pady=5)
+    empty_label = tk.Label(frame, text="", anchor='w', justify='left', padx=10, pady=5)
     empty_label.pack(side=tk.TOP, fill=tk.BOTH)
-    separator = ttk.Separator(frame, orient="horizontal", style="Custom.TSeparator")
+    separator = ttk.Separator(frame, orient="horizontal")
     separator.pack(side=tk.TOP, fill=tk.BOTH)
 
 root.mainloop()
