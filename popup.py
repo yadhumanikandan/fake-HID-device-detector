@@ -11,7 +11,7 @@ def popup(device_name):
 
     def close_message_window():
         root.destroy()
-        command = "python3 /home/manik/project/cp/tktest.py"
+        command = "python3 /home/manik/project/cp/showlog.py"
         subprocess.run(command, shell=True)
 
     close_button = tk.Button(root, text="Show Log", command=close_message_window, width=10, height=3)
