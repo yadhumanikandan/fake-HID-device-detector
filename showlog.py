@@ -26,7 +26,7 @@ def on_frame_configure(event):
 
 frame.bind("<Configure>", on_frame_configure)
 
-for element in elements:
+for element in reversed(elements):
     colour = "black"
 
     if element["suspected"] == True:
