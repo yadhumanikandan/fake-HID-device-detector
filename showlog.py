@@ -10,6 +10,7 @@ with open("log.json", "r") as json_file:
 root = tk.Tk()
 root.title("List Viewer")
 root.geometry("1000x600")
+root.configure(bg='black')
 
 canvas = tk.Canvas(root)
 canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
@@ -27,7 +28,7 @@ def on_frame_configure(event):
 frame.bind("<Configure>", on_frame_configure)
 
 for element in reversed(elements):
-    colour = "black"
+    colour = "white"
 
     if element["suspected"] == True:
         colour = "red"
