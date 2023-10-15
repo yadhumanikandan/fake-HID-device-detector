@@ -18,7 +18,7 @@ scrollbar = ttk.Scrollbar(root, orient="vertical", command=canvas.yview)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 canvas.configure(yscrollcommand=scrollbar.set)
 
-frame = tk.Frame(canvas)
+frame = tk.Frame(canvas, bg='black')
 canvas.create_window((0, 0), window=frame, anchor="nw")
 
 def on_frame_configure(event):
