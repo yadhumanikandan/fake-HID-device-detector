@@ -8,17 +8,17 @@ with open("log.json", "r") as json_file:
 
 
 root = tk.Tk()
-root.title("List Viewer")
+root.title("Log")
 root.geometry("1000x600")
 
-canvas = tk.Canvas(root, bg='black')
+canvas = tk.Canvas(root)
 canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
 scrollbar = ttk.Scrollbar(root, orient="vertical", command=canvas.yview)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-canvas.configure(yscrollcommand=scrollbar.set)
+canvas.configure(yscrollcommand=scrollbar.set, bg='black')
 
-frame = tk.Frame(canvas, bg='black')
+frame = tk.Frame(canvas)
 canvas.create_window((0, 0), window=frame, anchor="nw")
 
 def on_frame_configure(event):
