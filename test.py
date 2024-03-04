@@ -2,9 +2,9 @@ import requests
 
 # Define the data you want to insert
 data = {
-    'name': 'John Doe',
-    'email': 'john@example.com',
-    'age': 30
+    'name': 'yadhumanikandan',
+    'email': 'yadhumanikandan@gmail.com',
+    'age': 20
 }
 
 # Make a POST request to the Flask application to insert the data
