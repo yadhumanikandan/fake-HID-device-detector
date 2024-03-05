@@ -17,7 +17,7 @@ class Log(db.Model):
     event = db.Column(db.String(400))
     time = db.Column(db.String(100))
     name = db.Column(db.String(100))
-    suspected = db.Column(db.String)
+    suspected = db.Column(db.Boolean)
     vid = db.Column(db.String(10))
     pid = db.Column(db.String(10))
 
@@ -35,6 +35,7 @@ def display_users():
 @app.route('/insert', methods=['POST'])
 def insert_data():
     logs = request.json
+
 
     for data in logs:
         log = Log(event=data['event'], time=data['time'], name=data['name'], suspected=data['suspected'], vid=data['vid'], pid=data['pid'])

@@ -74,8 +74,13 @@ def save(output, time):
             data = extract(event)
             log.append({"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"]})
 
-            request_to_server(log)  #code for post request to server
+            ##########################################
+            log_to_server = [{"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"]}]
+
+            request_to_server(log_to_server)  #code for post request to server
             
+
+            ##########################################
             with open('log.json', 'w') as json_file:
                 json.dump(log, json_file, indent=4)
             if data["suspected"] == True:
@@ -86,15 +91,16 @@ def save(output, time):
         for event in output_lines:
             data = extract(event)
             log_data.append({"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"]})
-
-        request_to_server(log)  #code for post request to server
-        
+###############################################
+        request_to_server(log_data)  #code for post request to server
+#################################################
         with open('log.json', 'w') as json_file:
             json.dump(log_data, json_file, indent=4)
 
 
 output = """[   2.040790] hid-generic 0003:80EE:0021.0001: input,hidraw0: USB HID v1.10 Mouse [VirtualBox USB Tablet] on usb-0000:00:06.0-1/input0
             [   2.040790] hid-generic 0003:80EE:0021.0001: input,hidraw0: USB HID v1.10 Mouse [Raspberry Pi pico] on usb-0000:00:06.0-1/input0
+            [   2.040790] hid-generic 0003:80EE:0021.0001: input,hidraw0: USB HID v1.10 keyboard [Raspberry Pi pico2222] on usb-0000:00:06.0-1/input0
          """
 
 
