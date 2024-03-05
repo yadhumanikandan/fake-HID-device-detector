@@ -100,7 +100,10 @@ def save(output, time):
 
 output = """[   2.040790] hid-generic 0003:80EE:0021.0001: input,hidraw0: USB HID v1.10 Mouse [VirtualBox USB Tablet] on usb-0000:00:06.0-1/input0
             [   2.040790] hid-generic 0003:80EE:0021.0001: input,hidraw0: USB HID v1.10 Mouse [Raspberry Pi pico] on usb-0000:00:06.0-1/input0
-            [   2.040790] hid-generic 0003:80EE:0021.0001: input,hidraw0: USB HID v1.10 keyboard [Raspberry Pi pico2222] on usb-0000:00:06.0-1/input0
+            [   2.040790] hid-generic 00023:840EE:04021.50001: input,hidraw0: USB HID v1.10 keyboard [Raspberry Pi pico2222] on usb-0000:00:06.0-1/input0
+             [   2.040790] hid-generic 0003:80E7E:00621.0001: input,hidraw0: USB HID v1.10 keyboard [Raspberry Pi pico2222] on usb-0000:00:06.0-1/input0
+              [   2.040790] hid-generic 0003:808EE:05021.0001: input,hidraw0: USB HID v1.10 keyboard [Raspberry Pi pico2222] on usb-0000:00:06.0-1/input0
+               [   2.040790] hid-generic 0003:80EE9:00921.0001: input,hidraw0: USB HID v1.10 keyboard [Raspberry Pi pico2222] on usb-0000:00:06.0-1/input0
          """
 
 

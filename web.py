@@ -24,7 +24,13 @@ class Log(db.Model):
 
 @app.route('/')
 def home():
-    return render_template("home.html")
+    unique_pids = Log.query.distinct().with_entities(Log.pid).all()
+    return render_template('home.html', unique_pids=unique_pids)
+
+@app.route('/records/<pid>')
+def records(pid):
+    records = Log.query.filter_by(pid=pid).all()
+    return render_template('show_logs.html', pid=pid, logs=records)
 
 @app.route('/logs')
 def display_users():
@@ -33,6 +39,12 @@ def display_users():
     # logs = Log.query.all()
     # log_list = [{'id': log.id, 'event': log.event, 'time': log.time, 'name': log.name, 'suspected': log.suspected, 'vid': log.vid, 'pid': log.pid} for log in logs]
     # return jsonify({'logs': log_list}), 200
+
+@app.route('/unique_pids')
+def unique_pids():
+    unique_pids = Log.query.distinct().with_entities(Log.pid).all()
+    unique_pids = [log.pid for log in unique_pids]
+    return jsonify({'unique_pids': unique_pids}), 200
 
 @app.route('/insert', methods=['POST'])
 def insert_data():
