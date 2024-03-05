@@ -1,5 +1,3 @@
-# fake HID device detector
-
 import subprocess
 import json
 import datetime
@@ -8,6 +6,10 @@ import threading
 import os
 from popup import popup
 import requests
+
+
+current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
 
 def request_to_server(log):
     # Make a POST request to the Flask application to insert the data
@@ -19,20 +21,6 @@ def request_to_server(log):
     else:
         print("Error:", response.text)
 
-
-def search_usb():
-    command = "dmesg | grep -i hid-generic"
-
-    current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-
-    if result.returncode == 0:
-        output = result.stdout
-        save(output, current_time)
-
-    else:
-        error_message = result.stderr
-        print(error_message)
 
 
 def extract(event):
@@ -105,11 +93,9 @@ def save(output, time):
             json.dump(log_data, json_file, indent=4)
 
 
+output = """[   2.040790] hid-generic 0003:80EE:0021.0001: input,hidraw0: USB HID v1.10 Mouse [VirtualBox USB Tablet] on usb-0000:00:06.0-1/input0
+            [   2.040790] hid-generic 0003:80EE:0021.0001: input,hidraw0: USB HID v1.10 Mouse [Raspberry Pi pico] on usb-0000:00:06.0-1/input0
+         """
 
-def main():
-    while True:
-        search_usb()
 
-
-if __name__ == "__main__":
-    main()
+save(output, current_time)

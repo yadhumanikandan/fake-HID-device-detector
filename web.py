@@ -12,21 +12,33 @@ class User(db.Model):
     email = db.Column(db.String(100))
     age = db.Column(db.Integer)
 
+class Log(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    event = db.Column(db.String(400))
+    time = db.Column(db.String(100))
+    name = db.Column(db.String(100))
+    suspected = db.Column(db.String)
+    vid = db.Column(db.String(10))
+    pid = db.Column(db.String(10))
+
+
 @app.route('/')
 def home():
     return render_template("home.html")
 
 @app.route('/users')
 def display_users():
-    users = User.query.all()
-    user_list = [{'id': user.id, 'name': user.name, 'email': user.email, 'age': user.age} for user in users]
-    return jsonify({'users': user_list}), 200
+    logs = Log.query.all()
+    log_list = [{'id': log.id, 'event': log.event, 'time': log.time, 'name': log.name, 'suspected': log.suspected, 'vid': log.vid, 'pid': log.pid} for log in logs]
+    return jsonify({'logs': log_list}), 200
 
 @app.route('/insert', methods=['POST'])
 def insert_data():
-    data = request.json
-    user = User(name=data['name'], email=data['email'], age=data['age'])
-    db.session.add(user)
+    logs = request.json
+
+    for data in logs:
+        log = Log(event=data['event'], time=data['time'], name=data['name'], suspected=data['suspected'], vid=data['vid'], pid=data['pid'])
+        db.session.add(log)
     db.session.commit()
     return jsonify({'message': 'Data inserted successfully'}), 200
 
@@ -34,3 +46,4 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(host='0.0.0.0', port=5000)
+
