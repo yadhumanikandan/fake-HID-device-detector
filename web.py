@@ -26,11 +26,13 @@ class Log(db.Model):
 def home():
     return render_template("home.html")
 
-@app.route('/users')
+@app.route('/logs')
 def display_users():
     logs = Log.query.all()
-    log_list = [{'id': log.id, 'event': log.event, 'time': log.time, 'name': log.name, 'suspected': log.suspected, 'vid': log.vid, 'pid': log.pid} for log in logs]
-    return jsonify({'logs': log_list}), 200
+    return render_template('show_logs.html', logs=logs)
+    # logs = Log.query.all()
+    # log_list = [{'id': log.id, 'event': log.event, 'time': log.time, 'name': log.name, 'suspected': log.suspected, 'vid': log.vid, 'pid': log.pid} for log in logs]
+    # return jsonify({'logs': log_list}), 200
 
 @app.route('/insert', methods=['POST'])
 def insert_data():
