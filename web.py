@@ -1,16 +1,28 @@
-from flask import Flask, request, jsonify, render_template, url_for, redirect
+from flask import Flask, request, jsonify, render_template, url_for, redirect, session
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
+
+app.secret_key = "lasdfoh389h9qhweohpqe8hgqh9hqwh49hq9hgq9h"
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable modification tracking
 db = SQLAlchemy(app)
 
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SESSION_PERMANENT'] = True
+
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
-    email = db.Column(db.String(100))
-    age = db.Column(db.Integer)
+    username = db.Column(db.String(100), unique=True, nullable=False)
+    password_hash = db.Column(db.String(100), nullable=False)
+
+    def __init__(self, username, password_hash):
+        self.username = username
+        self.password_hash = password_hash
+
 
 class Log(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -22,10 +34,67 @@ class Log(db.Model):
     pid = db.Column(db.String(10))
 
 
-@app.route('/')
+
+
+@app.route("/")
+def index():
+    #check if user already in session
+    if "email" in session:
+        return redirect(url_for("home"))
+    else:
+        return redirect(url_for("login"))
+
+
+@app.route('/home')
 def home():
     unique_pids = Log.query.distinct().with_entities(Log.pid).all()
     return render_template('home.html', unique_pids=unique_pids)
+
+@app.route("/login", methods=["POST", "GET"])
+def login():
+    if "username" in session:
+        return redirect(url_for("home"))
+    else:
+        if request.method == "POST":
+            found_user = User.query.filter_by(username=request.form["username"]).first()
+            if found_user == None: 
+                return redirect(url_for("signup"))
+            elif check_password_hash(found_user.password_hash, request.form["password"]):
+                # session["email"] = request.form["email"]
+                session["username"] = found_user.username
+                session.permanent = True
+                return redirect(url_for("home"))
+            else:
+                return redirect(url_for("login"))
+            
+        else:
+            return render_template("login.html")
+        
+
+@app.route("/signup", methods=["POST", "GET"])
+def signup():
+    if request.method == "POST":
+        found_user = User.query.filter_by(username = request.form["username"]).first()
+        #check if user already exist in database
+        if found_user == None:
+            #if user not exit
+            session["username"] = request.form["username"]
+            # session["email"] = request.form["email"]
+            session.permanent = True
+
+            password_hash = generate_password_hash(request.form["password"])
+            usr = User(session["username"], password_hash)
+            db.session.add(usr)
+            db.session.commit()
+
+            return redirect(url_for("home"))
+        else:
+            #if already exist
+            return "<h1>user already exist</h1>"
+    else:
+        return render_template("register.html")
+    
+
 
 @app.route('/records/<pid>')
 def records(pid):
@@ -36,9 +105,7 @@ def records(pid):
 def display_users():
     logs = Log.query.all()
     return render_template('show_logs.html', logs=logs)
-    # logs = Log.query.all()
-    # log_list = [{'id': log.id, 'event': log.event, 'time': log.time, 'name': log.name, 'suspected': log.suspected, 'vid': log.vid, 'pid': log.pid} for log in logs]
-    # return jsonify({'logs': log_list}), 200
+
 
 @app.route('/unique_pids')
 def unique_pids():
@@ -56,6 +123,15 @@ def insert_data():
         db.session.add(log)
     db.session.commit()
     return jsonify({'message': 'Data inserted successfully'}), 200
+
+
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("index"))
+
+
 
 if __name__ == '__main__':
     with app.app_context():
