@@ -1,8 +1,8 @@
 /* static/styles.css */
 
 body {
-    background-color: #f0f0f0; /* Light background color */
     font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
 }
 
 table {
@@ -26,4 +26,88 @@ tr.suspected-true {
 
 tr.suspected-false {
     background-color: #66ffb5cb; /* Background color for rows with "true" in suspected column */
+}
+
+
+/* login and register pages */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    width: 400px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+
+
+/* CSS for flashed messages */
+.alert {
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
 }

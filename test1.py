@@ -21,6 +21,10 @@ def request_to_server(log):
     else:
         print("Error:", response.text)
 
+def get_username():
+    default_username = os.getlogin()
+
+    return default_username
 
 
 def extract(event):
@@ -72,10 +76,10 @@ def save(output, time):
 
         for event in difference:
             data = extract(event)
-            log.append({"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"]})
+            log.append({"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"], "user": get_username()})
 
             ##########################################
-            log_to_server = [{"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"]}]
+            log_to_server = [{"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"], "user": get_username()}]
 
             request_to_server(log_to_server)  #code for post request to server
             
@@ -90,7 +94,7 @@ def save(output, time):
     else:
         for event in output_lines:
             data = extract(event)
-            log_data.append({"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"]})
+            log_data.append({"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"], "user": get_username()})
 ###############################################
         request_to_server(log_data)  #code for post request to server
 #################################################

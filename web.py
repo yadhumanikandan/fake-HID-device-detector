@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, url_for, redirect, session
+from flask import Flask, request, jsonify, render_template, url_for, redirect, session, flash
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -32,6 +32,7 @@ class Log(db.Model):
     suspected = db.Column(db.Boolean)
     vid = db.Column(db.String(10))
     pid = db.Column(db.String(10))
+    user = db.Column(db.String(50))
 
 
 
@@ -39,7 +40,7 @@ class Log(db.Model):
 @app.route("/")
 def index():
     #check if user already in session
-    if "email" in session:
+    if "username" in session:
         return redirect(url_for("home"))
     else:
         return redirect(url_for("login"))
@@ -47,8 +48,11 @@ def index():
 
 @app.route('/home')
 def home():
-    unique_pids = Log.query.distinct().with_entities(Log.pid).all()
-    return render_template('home.html', unique_pids=unique_pids)
+    if "username" in session:
+        unique_pids = Log.query.distinct().with_entities(Log.pid).all()
+        return render_template('home.html', unique_pids=unique_pids)
+    else:
+        return redirect(url_for("login"))
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
@@ -58,9 +62,9 @@ def login():
         if request.method == "POST":
             found_user = User.query.filter_by(username=request.form["username"]).first()
             if found_user == None: 
+                flash('User not found! Create an account.', 'info')
                 return redirect(url_for("signup"))
             elif check_password_hash(found_user.password_hash, request.form["password"]):
-                # session["email"] = request.form["email"]
                 session["username"] = found_user.username
                 session.permanent = True
                 return redirect(url_for("home"))
@@ -79,7 +83,6 @@ def signup():
         if found_user == None:
             #if user not exit
             session["username"] = request.form["username"]
-            # session["email"] = request.form["email"]
             session.permanent = True
 
             password_hash = generate_password_hash(request.form["password"])
@@ -119,7 +122,7 @@ def insert_data():
 
 
     for data in logs:
-        log = Log(event=data['event'], time=data['time'], name=data['name'], suspected=data['suspected'], vid=data['vid'], pid=data['pid'])
+        log = Log(event=data['event'], time=data['time'], name=data['name'], suspected=data['suspected'], vid=data['vid'], pid=data['pid'], user=data['user'])
         db.session.add(log)
     db.session.commit()
     return jsonify({'message': 'Data inserted successfully'}), 200
@@ -128,8 +131,13 @@ def insert_data():
 
 @app.route("/logout")
 def logout():
-    session.clear()
-    return redirect(url_for("index"))
+    if "username" in session:
+        session.clear()
+        flash('You have been logged out!', 'warning')
+        return redirect(url_for("index"))
+    else:
+        session.clear()
+        return redirect(url_for("index"))
 
 
 
