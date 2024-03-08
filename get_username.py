@@ -1,4 +1,6 @@
+import os
 import pwd
+import stat
 
 def get_default_username():
     try:
