@@ -1,14 +1,7 @@
 import os
-import pwd
-import stat
 
 def get_default_username():
-    try:
-        # Get the UID of the home directory
-        home_dir = pwd.getpwuid(os.stat('/home')[stat.ST_UID]).pw_name
-        return home_dir
-    except KeyError:
-        return None
+    return os.getlogin()
 
 default_username = get_default_username()
 if default_username:
