@@ -1,9 +1,9 @@
 import os
 
-def get_default_username():
-    return os.getlogin()
+# def get_default_username():
+#     return os.getlogin()
 
-default_username = get_default_username()
+default_username = os.getlogin()
 if default_username:
     print("Default username:", default_username)
 else:
