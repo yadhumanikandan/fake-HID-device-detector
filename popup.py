@@ -1,6 +1,6 @@
 import tkinter as tk
 import subprocess
-from show_test import show_logs
+from showlog import show_logs
 
 def popup(device_name):
     root = tk.Tk()
