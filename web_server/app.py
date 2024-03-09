@@ -82,13 +82,14 @@ def login():
             if found_user == None: 
                 flash('User not found! Create an account.', 'info')
                 return redirect(url_for("register"))
-            elif check_password_hash(found_user.password_hash, request.form["password"]):
-                session["username"] = found_user.username
-                session.permanent = True
-                return redirect(url_for("index"))
-            else:
-                return redirect(url_for("login"))
-            
+            elif found_user:
+                if check_password_hash(found_user.password_hash, request.form["password"]):
+                    session["username"] = found_user.username
+                    session.permanent = True
+                    return redirect(url_for("index"))
+                else:
+                    flash("Password incorrect!", "danger")
+                    return redirect(url_for("login"))
         else:
             return render_template("login.html")
         
@@ -100,19 +101,22 @@ def register():
         found_user = User.query.filter_by(username = request.form["username"]).first()
         #check if user already exist in database
         if found_user == None:
-            #if user not exit
-            session["username"] = request.form["username"]
-            session.permanent = True
+            if request.form["password"] == request.form["re-password"]:
+                session["username"] = request.form["username"]
+                session.permanent = True
 
-            password_hash = generate_password_hash(request.form["password"])
-            usr = User(session["username"], password_hash)
-            db.session.add(usr)
-            db.session.commit()
+                password_hash = generate_password_hash(request.form["password"])
+                usr = User(session["username"], password_hash)
+                db.session.add(usr)
+                db.session.commit()
 
-            flash("User registered!", "success")
-            return redirect(url_for("index"))
+                flash("User registered!", "success")
+                return redirect(url_for("index"))
+            else:
+                flash("Passwords not matching! Try again", "danger")
+                return redirect(url_for("register"))
         else:
-            flash("User already exists!", "info")
+            flash("User already exists! Please login", "info")
             return redirect(url_for("login"))
     else:
         return render_template("register.html")
