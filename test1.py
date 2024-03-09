@@ -76,10 +76,10 @@ def save(output, time):
 
         for event in difference:
             data = extract(event)
-            log.append({"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"], "user": get_username()})
+            log.append({"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"], "user": "hari"})
 
             ##########################################
-            log_to_server = [{"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"], "user": get_username()}]
+            log_to_server = [{"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"], "user": "hari"}]
 
             request_to_server(log_to_server)  #code for post request to server
             
@@ -94,7 +94,7 @@ def save(output, time):
     else:
         for event in output_lines:
             data = extract(event)
-            log_data.append({"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"], "user": get_username()})
+            log_data.append({"event": event, "time": time, "name": data["name"], "suspected": data["suspected"], "vid": data["vid"], "pid": data["pid"], "user": "hari"})
 ###############################################
         request_to_server(log_data)  #code for post request to server
 #################################################
@@ -108,6 +108,9 @@ output = """[   2.040790] hid-generic 0003:80EE:0021.0001: input,hidraw0: USB HI
              [   2.040790] hid-generic 0003:80E7E:00621.0001: input,hidraw0: USB HID v1.10 keyboard [Raspberry Pi pico2222] on usb-0000:00:06.0-1/input0
               [   2.040790] hid-generic 0003:808EE:05021.0001: input,hidraw0: USB HID v1.10 keyboard [Raspberry Pi pico2222] on usb-0000:00:06.0-1/input0
                [   2.040790] hid-generic 0003:80EE9:00921.0001: input,hidraw0: USB HID v1.10 keyboard [Raspberry Pi pico2222] on usb-0000:00:06.0-1/input0
+               [   2.040790] hid-generic 0003:80EE:0021.0001: input,hidraw0: USB HID v1.10 Mouse [VirtualBox USB Tablet] on usb-0000:00:06.0-1/input0
+               [   2.040790] hid-generic 0003:80EE:0021.0001: input,hidraw0: USB HID v1.10 Mouse [VirtualBox USB Tablet] on usb-0000:00:06.0-1/input0
+               [   2.040790] hid-generic 0003:80EE:0021.0001: input,hidraw0: USB HID v1.10 Mouse [VirtualBox USB Tablet] on usb-0000:00:06.0-1/input0
          """
 
 

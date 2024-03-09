@@ -1,40 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logs</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
-    <h1>Records for PID: {{ pid }}</h1>
+{% extends 'base.html' %}
+
+{% block title %}Admin - logs{% endblock %}
+
+{% block content %}
+    {% if user %}
+        <h1>Logs for user: {{ user }}</h1>
+    {% else %}
+        <h1>All Logs</h1>
+    {% endif %}
     <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Event</th>
-                <th>Time</th>
-                <th>Name</th>
-                <th>Suspected</th>
-                <th>VID</th>
-                <th>PID</th>
-                <th>user</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for log in logs %}
-            <tr class="{% if log.suspected %}suspected-true{% else %}suspected-false{% endif %}">
-                <td>{{ log.id }}</td>
-                <td>{{ log.event }}</td>
-                <td>{{ log.time }}</td>
-                <td>{{ log.name }}</td>
-                <td>{{ log.suspected }}</td>
-                <td>{{ log.vid }}</td>
-                <td>{{ log.pid }}</td>
-                <td>{{ log.user }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Event</th>
+            <th>Time</th>
+            <th>Name</th>
+            <th>Suspected</th>
+            <th>VID</th>
+            <th>PID</th>
+            <th>user</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for log in logs %}
+        <tr class="{% if log.suspected %}suspected-true{% else %}suspected-false{% endif %}">
+            <td>{{ log.id }}</td>
+            <td>{{ log.event }}</td>
+            <td>{{ log.time }}</td>
+            <td>{{ log.name }}</td>
+            <td>{{ log.suspected }}</td>
+            <td>{{ log.vid }}</td>
+            <td>{{ log.pid }}</td>
+            <td>{{ log.user }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
     </table>
-</body>
-</html>
+{% endblock %}
