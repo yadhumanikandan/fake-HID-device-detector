@@ -1,5 +1,6 @@
 import tkinter as tk
 import subprocess
+from show_test import show_logs
 
 def popup(device_name):
     root = tk.Tk()
@@ -11,8 +12,9 @@ def popup(device_name):
 
     def close_message_window():
         root.destroy()
-        command = "python3 /home/manik/project/cp/showlog.py"
-        subprocess.run(command, shell=True)
+        show_logs()
+        # command = "python3 /home/manik/project/cp/showlog.py"
+        # subprocess.run(command, shell=True)
 
     close_button = tk.Button(root, text="Show Log", command=close_message_window, width=10, height=3)
     close_button.pack(pady=10)
