@@ -1,38 +1,7 @@
-from flask import Flask, request, jsonify, render_template, url_for, redirect, session, flash
-from flask_sqlalchemy import SQLAlchemy
+from flask import request, jsonify, render_template, url_for, redirect, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-
-app = Flask(__name__)
-
-app.secret_key = "lasdfoh389h9qhweohpqe8hgqh9hqwh49hq9hgq9h"
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable modification tracking
-db = SQLAlchemy(app)
-
-app.config['SESSION_TYPE'] = 'filesystem'
-app.config['SESSION_PERMANENT'] = True
-
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True, nullable=False)
-    password_hash = db.Column(db.String(100), nullable=False)
-
-    def __init__(self, username, password_hash):
-        self.username = username
-        self.password_hash = password_hash
-
-
-class Log(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    event = db.Column(db.String(400))
-    time = db.Column(db.String(100))
-    name = db.Column(db.String(100))
-    suspected = db.Column(db.Boolean)
-    vid = db.Column(db.String(10))
-    pid = db.Column(db.String(10))
-    user = db.Column(db.String(50))
+from config import app, db
+from models import User, Log
 
 
 
