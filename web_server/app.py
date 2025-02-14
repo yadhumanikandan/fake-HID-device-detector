@@ -126,6 +126,11 @@ def insert_data():
     for data in logs:
         log = Log(event=data['event'], time=data['time'], name=data['name'], suspected=data['suspected'], vid=data['vid'], pid=data['pid'], user=data['user'])
         db.session.add(log)
+
+        ######################################################################
+        ####################  CODE FOR SENDING MAIL  #########################
+        ######################################################################
+
     db.session.commit()
     return jsonify({'message': 'Data inserted successfully'}), 200
 
