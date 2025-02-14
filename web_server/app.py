@@ -2,6 +2,8 @@ from flask import request, jsonify, render_template, url_for, redirect, session,
 from werkzeug.security import generate_password_hash, check_password_hash
 from config import app, db
 from models import User, Log
+import threading
+from .send_mail import send_email
 
 
 
@@ -129,6 +131,15 @@ def insert_data():
 
         ######################################################################
         ####################  CODE FOR SENDING MAIL  #########################
+
+        if data['suspected']:
+            subject = "Suspicious Activity Detected"
+            body = f"Alert! Suspicious activity detected.\n\nDetails:\nEvent: {data['event']}\nTime: {data['time']}\nUser: {data['user']}"
+            to_email = "yadhumanikandan0@gmail.com"  # Change to actual recipient
+
+            email_thread = threading.Thread(target=send_email, args=(to_email, subject, body))
+            email_thread.start()
+
         ######################################################################
 
     db.session.commit()
