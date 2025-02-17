@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from config import app, db
 from models import User, Log
 import threading
-from .send_mail import send_email
+from send_mail import send_email
 
 
 
