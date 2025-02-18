@@ -11,7 +11,7 @@ import requests
 
 def request_to_server(log):
     # Make a POST request to the Flask application to insert the data
-    response = requests.post('http://127.0.0.1:5000/insert', json=log)
+    response = requests.post('http://13.201.144.204:5000/insert', json=log)
 
     # Check the response status
     if response.status_code == 200:
