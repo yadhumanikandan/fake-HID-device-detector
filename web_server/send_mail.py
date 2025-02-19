@@ -2,7 +2,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-def send_email(to_email, subject, body, from_email="hiddetector@gmail.com", app_password="pslmihzeplfpwymy"):
+def send_email(to_email, subject, body, from_email="hiddetector@gmail.com", app_password="mbwvnuvlntaexgoy"):
     try:
         # Setting up the MIME structure
         msg = MIMEMultipart()
