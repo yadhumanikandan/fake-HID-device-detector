@@ -132,13 +132,15 @@ def insert_data():
         ######################################################################
         ####################  CODE FOR SENDING MAIL  #########################
 
-        if True:
+        if log.suspected:
             subject = "Suspicious Activity Detected"
             body = f"Alert! Suspicious activity detected.\n\nDetails:\nEvent: {data['event']}\nTime: {data['time']}\nUser: {data['user']}"
             to_email = "yadhumanikandan0@gmail.com"  # Change to actual recipient
 
-            email_thread = threading.Thread(target=send_email, args=(to_email, subject, body))
-            email_thread.start()
+            send_email(to_email, subject, body)
+
+            # email_thread = threading.Thread(target=send_email, args=(to_email, subject, body))
+            # email_thread.start()
 
         ######################################################################
 
