@@ -22,7 +22,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for log in logs %}
+        {% for log in logs[::-1] %}
         <tr class="{% if log.suspected %}suspected-true{% else %}suspected-false{% endif %}">
             <td>{{ log.id }}</td>
             <td>{{ log.event }}</td>
