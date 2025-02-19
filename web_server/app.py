@@ -132,7 +132,7 @@ def insert_data():
         ######################################################################
         ####################  CODE FOR SENDING MAIL  #########################
 
-        if data['suspected']:
+        if data['suspected'] == 'True':
             subject = "Suspicious Activity Detected"
             body = f"Alert! Suspicious activity detected.\n\nDetails:\nEvent: {data['event']}\nTime: {data['time']}\nUser: {data['user']}"
             to_email = "yadhumanikandan0@gmail.com"  # Change to actual recipient
