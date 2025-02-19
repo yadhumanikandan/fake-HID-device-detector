@@ -2,7 +2,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-def send_email(to_email, subject, body, from_email="hiddetector@gmail.com", app_password="mbwvnuvlntaexgoy"):
+def send_email(to_email, subject, body, from_email="hiddetector@gmail.com", app_password="mvnkyahctkwaxami"):
     try:
         # Setting up the MIME structure
         msg = MIMEMultipart()
@@ -21,4 +21,5 @@ def send_email(to_email, subject, body, from_email="hiddetector@gmail.com", app_
     
     except Exception as e:
         print(f"Error sending email: {e}")
+
 
