@@ -52,6 +52,27 @@
 
 
 
+ 
+
+---
+
+# **Abstract**  
+
+In today’s digital landscape, cyber threats targeting computer systems have evolved, with fake Human Interface Device (HID) attacks posing a significant risk. These attacks, utilizing malicious USB devices like the USB Rubber Ducky and OMG Cable, can bypass traditional security mechanisms and execute unauthorized commands on a victim’s system. This project, **Fake Human Interface Device Detector**, is a cybersecurity solution developed in **Python** that actively monitors and detects fake HID devices in an office environment.  
+
+The system runs continuously on every workstation, detecting unauthorized HID devices and alerting the user in real-time. Simultaneously, it updates a **cloud-based monitoring dashboard** hosted on an **AWS EC2 instance** using a **Flask web application**. This dashboard allows users to review logs of connected USB devices, while administrators gain organization-wide visibility into potential threats.  
+
+The detector works by maintaining a database of known fake HID devices and comparing every plugged-in device against this list. If a match is found, an immediate alert is triggered, detailing the suspicious device. By integrating local monitoring with a centralized web-based interface, this project provides a **robust defense against USB-based cyber attacks**, ensuring both individual users and IT administrators can respond effectively to security threats.  
+
+This report details the **threat model**, **system architecture**, **technical implementation**, **working mechanism**, **real-time detection and alerting**, and **future enhancements** to further strengthen USB security in corporate environments.  
+
+---
+
+
+
+
+
+
 
 
 
